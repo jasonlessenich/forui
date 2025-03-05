@@ -112,7 +112,7 @@ class FSwitch extends StatelessWidget {
           toggled: value,
           child: FLabel(
             axis: Axis.horizontal,
-            state: labelState,
+            states: labelState,
             style: style.labelStyle,
             label: label,
             description: description,
@@ -218,7 +218,7 @@ final class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
     layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
   );
 }
 

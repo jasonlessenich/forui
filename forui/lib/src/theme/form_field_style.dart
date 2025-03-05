@@ -7,15 +7,17 @@ import 'package:forui/forui.dart';
 
 part 'form_field_style.style.dart';
 
+final a = WidgetState.focused | WidgetState.hovered;
+
 /// A form field state's style.
 class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// The label's text style.
   @override
-  final TextStyle labelTextStyle;
+  final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The description's text style.
   @override
-  final TextStyle descriptionTextStyle;
+  final FWidgetStateMap<TextStyle> descriptionTextStyle;
 
   /// Creates a [FFormFieldStyle].
   const FFormFieldStyle({required this.labelTextStyle, required this.descriptionTextStyle});

@@ -3,6 +3,35 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 @internal
+extension WidgetStates on Never {
+  /// {@template forui.foundation.doc_templates.tappable}
+  /// The following states are supported:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// {@endtemplate}
+  static const tappable = '';
+
+  /// {@template forui.foundation.doc_templates.selectable}
+  /// The following states are supported:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.selected]
+  /// {@endtemplate}
+  static const selectable = '';
+
+  /// {@template forui.foundation.doc_templates.form}
+  /// The following states are supported:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// {@endtemplate}
+  static const form = '';
+}
+
+@internal
 extension Focus on Never {
   /// {@template forui.foundation.doc_templates.autofocus}
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.

@@ -223,7 +223,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              tile = FLabel(
                axis: Axis.vertical,
                style: labelStyle,
-               state: labelState,
+               states: labelState,
                label: label,
                description: description,
                error: error,
@@ -356,7 +356,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              tile = FLabel(
                axis: Axis.vertical,
                style: labelStyle,
-               state: labelState,
+               states: labelState,
                label: label,
                description: description,
                error: error,
@@ -532,5 +532,5 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
 
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
+  FLabelStyle get labelStyle => (layout: labelLayoutStyle, states: this);
 }

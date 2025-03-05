@@ -143,7 +143,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
           (_, data, child) => Padding(
             padding: style.padding,
             child: DefaultTextStyle(
-              style: switch ((current, data.hovered)) {
+              style: switch ((current, data._hovered)) {
                 (false, false) => style.unselectedTextStyle,
                 (false, true) => style.hoveredTextStyle,
                 (true, true) => style.hoveredTextStyle,

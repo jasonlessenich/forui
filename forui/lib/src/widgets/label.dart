@@ -10,18 +10,6 @@ part 'label.style.dart';
 /// The [FLabel]'s style.
 typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyles state});
 
-/// The label's state.
-enum FLabelState {
-  /// The label is enabled.
-  enabled,
-
-  /// The label is disabled.
-  disabled,
-
-  /// The label has an error.
-  error,
-}
-
 /// A label that describes a form field with a label, description, and error message (if any).
 ///
 /// There are two different [Axis] variants for labels:
@@ -64,10 +52,12 @@ final class FLabel extends StatelessWidget {
   /// The axis that represents.
   final Axis axis;
 
-  /// The state of the label.
+  /// The state of the label. Defaults to empty (enabled).
   ///
-  /// If state != [FLabelState.error], the [error] will not be displayed.
-  final FLabelState state;
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  final Set<WidgetState> states;
 
   /// The child.
   final Widget child;
@@ -80,7 +70,7 @@ final class FLabel extends StatelessWidget {
     this.label,
     this.description,
     this.error,
-    this.state = FLabelState.enabled,
+    this.states = const {},
     super.key,
   });
 
@@ -103,7 +93,7 @@ final class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
-        state: state,
+        state: states,
         child: child,
       ),
       Axis.vertical => _FVerticalLabel(
@@ -111,7 +101,7 @@ final class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
-        state: state,
+        state: states,
         child: child,
       ),
     };
@@ -122,7 +112,7 @@ final class FLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('axis', axis))
-      ..add(EnumProperty('state', state));
+      ..add(IterableProperty('states', states));
   }
 }
 
@@ -146,9 +136,9 @@ final class _FHorizontalLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stateStyle = switch (state) {
-      FLabelState.enabled => style.state.enabledStyle,
-      FLabelState.disabled => style.state.disabledStyle,
-      FLabelState.error => style.state.errorStyle,
+      FLabelState.enabled => style.states.enabledStyle,
+      FLabelState.disabled => style.states.disabledStyle,
+      FLabelState.error => style.states.errorStyle,
     };
 
     return Table(
@@ -187,7 +177,7 @@ final class _FHorizontalLabel extends StatelessWidget {
               TableCell(
                 child: Padding(
                   padding: style.layout.errorPadding,
-                  child: DefaultTextStyle(style: style.state.errorStyle.errorTextStyle, child: error!),
+                  child: DefaultTextStyle(style: style.states.errorStyle.errorTextStyle, child: error!),
                 ),
               ),
             ],
@@ -233,9 +223,9 @@ class _FVerticalLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stateStyle = switch (state) {
-      FLabelState.enabled => style.state.enabledStyle,
-      FLabelState.disabled => style.state.disabledStyle,
-      FLabelState.error => style.state.errorStyle,
+      FLabelState.enabled => style.states.enabledStyle,
+      FLabelState.disabled => style.states.disabledStyle,
+      FLabelState.error => style.states.errorStyle,
     };
 
     return Column(
@@ -265,7 +255,7 @@ class _FVerticalLabel extends StatelessWidget {
           Padding(
             padding: style.layout.errorPadding,
             child: DefaultTextStyle(
-              style: style.state.errorStyle.errorTextStyle,
+              style: style.states.errorStyle.errorTextStyle,
               textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
               child: error!,
             ),
@@ -304,7 +294,7 @@ final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
           descriptionPadding: EdgeInsets.only(top: 2),
           errorPadding: EdgeInsets.only(top: 2),
         ),
-        state: FLabelStateStyles.inherit(style: style),
+        states: FLabelStateStyles.inherit(style: style),
       ),
       verticalStyle = (
         layout: const FLabelLayoutStyle(
@@ -312,7 +302,7 @@ final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
           descriptionPadding: EdgeInsets.only(top: 5),
           errorPadding: EdgeInsets.only(top: 5),
         ),
-        state: FLabelStateStyles.inherit(style: style),
+        states: FLabelStateStyles.inherit(style: style),
       );
 }
 

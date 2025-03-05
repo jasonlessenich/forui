@@ -131,7 +131,7 @@ class FTile extends StatelessWidget with FTileMixin {
 
     Widget content(FTappableData data) => DecoratedBox(
       decoration: BoxDecoration(
-        color: switch ((enabled, data.hovered)) {
+        color: switch ((enabled, data._hovered)) {
           (true, true) => style.enabledHoveredBackgroundColor,
           (true, false) => style.enabledBackgroundColor,
           (false, _) => style.disabledBackgroundColor,
@@ -162,7 +162,7 @@ class FTile extends StatelessWidget with FTileMixin {
         style: style,
         divider: tile.divider,
         enabled: enabled,
-        hovered: data.hovered,
+        hovered: data._hovered,
         focused: data.focused,
         index: tile.index,
         last: tile.last,

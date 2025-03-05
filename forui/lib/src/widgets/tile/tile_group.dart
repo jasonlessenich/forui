@@ -219,7 +219,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       return FLabel(
         style: style.labelStyle,
         axis: Axis.vertical,
-        state: switch ((enabled, error)) {
+        states: switch ((enabled, error)) {
           _ when !enabled => FLabelState.disabled,
           (_, null) => FLabelState.enabled,
           _ => FLabelState.error,
@@ -313,7 +313,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     return FLabel(
       style: style.labelStyle,
       axis: Axis.vertical,
-      state: switch ((enabled, error)) {
+      states: switch ((enabled, error)) {
         _ when !enabled => FLabelState.disabled,
         (_, null) => FLabelState.enabled,
         _ => FLabelState.error,
@@ -447,7 +447,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
 
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
+  FLabelStyle get labelStyle => (layout: labelLayoutStyle, states: this);
 }
 
 /// Extracts the data from the given [FTileGroupData].

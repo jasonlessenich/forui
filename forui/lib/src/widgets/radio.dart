@@ -120,7 +120,7 @@ class _State extends State<FRadio> {
           checked: widget.value,
           child: FLabel(
             axis: Axis.horizontal,
-            state: labelState,
+            states: labelState,
             style: style.labelStyle,
             label: widget.label,
             description: widget.description,
@@ -234,7 +234,7 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
     layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
   );
 }
 
