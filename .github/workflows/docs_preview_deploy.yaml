@@ -56,7 +56,7 @@ jobs:
       - working-directory: ./docs
         run: |
           pnpm install
-          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run export
+          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run build
       - uses: cloudflare/wrangler-action@v3
         id: publish-docs
         with:
@@ -88,4 +88,4 @@ jobs:
       # Check that all relative URLs are working. We don't check external links due to rate limiting.
       - uses: actions/setup-go@v5
       - run: go install github.com/raviqqe/muffet/v2@latest
-      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)|(shadcn.com)"
+      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=32768 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)|(shadcn.com)"
